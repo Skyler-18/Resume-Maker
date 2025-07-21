@@ -1,0 +1,4 @@
+.venv/
+static/generated/
+templates/copy.html
+__pycache__/

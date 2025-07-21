@@ -1,0 +1,47 @@
+body {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    background: #fff;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+h1, h2 {
+    font-family: 'Montserrat', 'Source Sans Pro', Arial, sans-serif;
+    font-variant: small-caps;
+    font-weight: normal;
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 2px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+}
+button {
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+button:hover {
+    background: #004999;
+}
+hr {
+    margin: 18px 0;
+}

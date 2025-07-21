@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f7f7f7;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .container {
+            background: #fff;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 36px 36px 28px 36px;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+        }
+        h1 {
+            font-size: 2.3em;
+            font-weight: bold;
+            margin-bottom: 0.7em;
+            color: #1a237e;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.15em;
+            color: #283593;
+            margin-top: 1.5em;
+            margin-bottom: 0.7em;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .card {
+            margin-bottom: 24px;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+            border: 1px solid #e3e3e3;
+        }
+        .card-body {
+            padding: 24px 24px 10px 24px;
+        }
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .form-control, .form-select {
+            font-size: 1em;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+        }
+        textarea.form-control {
+            min-height: 80px;
+            resize: vertical;
+            max-width: 100%;
+            overflow-y: auto;
+        }
+        .remove-btn {
+            background: #fff;
+            color: #d32f2f;
+            border: 1px solid #d32f2f;
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding: 4px 12px;
+            font-size: 0.95em;
+        }
+        .remove-btn:hover {
+            background: #d32f2f;
+            color: #fff;
+        }
+        .section-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1a237e;
+            margin-bottom: 0.5em;
+        }
+        .btn-section {
+            margin-bottom: 10px;
+        }
+        .row.g-3 > .col-md-6, .row.g-3 > .col-md-12 {
+            margin-bottom: 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px 2px;
+            }
+            .card-body {
+                padding: 12px 6px 6px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Generator</h1>
+        <form action="{{ url_for('generate') }}" method="post" id="resumeForm" class="needs-validation" autocomplete="off" novalidate>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Personal Details</div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label">Your Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="your_name" required maxlength="60" autocomplete="name">
+                            <div class="invalid-feedback">Name is required.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" name="phone" required pattern="^[0-9\-\+\s]{10,10}$" maxlength="10" autocomplete="tel">
+                            <div class="invalid-feedback">Enter a valid 10-digit phone number.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="email" required autocomplete="email">
+                            <div class="invalid-feedback">Enter a valid email address.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">LinkedIn <span class="text-danger">*</span></label>
+                            <input type="url" class="form-control" name="linkedin" required pattern="https?://.+" autocomplete="url">
+                            <div class="invalid-feedback">Enter a valid LinkedIn URL (must start with http:// or https://).</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">GitHub <span class="text-danger">*</span></label>
+                            <input type="url" class="form-control" name="github" required pattern="https?://.+" autocomplete="url">
+                            <div class="invalid-feedback">Enter a valid GitHub URL (must start with http:// or https://).</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Website <span class="text-secondary">(Optional)</span></label>
+                            <input type="url" class="form-control" name="website" pattern="https?://.+" autocomplete="url">
+                            <div class="invalid-feedback">Enter a valid Website URL (must start with http:// or https://).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Summary</div>
+                    <textarea class="form-control" name="summary" rows="3" required maxlength="400"></textarea>
+                    <div class="invalid-feedback">Summary is required.</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Education</div>
+                    <div id="education-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addEducation()">Add Education</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Experience</div>
+                    <div id="experience-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addExperience()">Add Experience</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Projects</div>
+                    <div id="projects-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addProject()">Add Project</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Technical Skills</div>
+                    <div id="skills-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addSkillGroup()">Add Skill Group</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Certifications</div>
+                    <div id="certifications-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addCertification()">Add Certification</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Co-curricular Activities</div>
+                    <div id="co-curricular-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addCoCurricular()">Add Co-curricular Activity</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Extra-curricular Activities</div>
+                    <div id="extra-curricular-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addExtraCurricular()">Add Extra-curricular Activity</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Publications</div>
+                    <div id="publications-section"></div>
+                    <button type="button" class="btn btn-outline-primary btn-section" onclick="addPublication()">Add Publication</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="section-title">Custom Section</div>
+                    <label class="form-label">Section Heading:
+                        <input type="text" class="form-control" name="custom_heading">
+                    </label>
+                    <label class="form-label">Points (one per line):
+                        <textarea class="form-control" name="custom_points"></textarea>
+                    </label>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4 mb-2">
+                <button type="submit" id="generate-pdf" class="btn btn-primary me-2">Generate PDF</button>
+                <button type="button" id="generate-docx" class="btn btn-secondary">Generate DOCX</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+</body>
+</html>
