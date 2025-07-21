@@ -1,47 +1,356 @@
 body {
-    font-family: 'Source Sans Pro', Arial, sans-serif;
-    background: #f7f7f7;
-    margin: 0;
-    padding: 0;
+    background: #f4f6fb;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
 }
+
 .container {
     background: #fff;
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
 }
-h1, h2 {
-    font-family: 'Montserrat', 'Source Sans Pro', Arial, sans-serif;
-    font-variant: small-caps;
-    font-weight: normal;
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #0d47a1;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
 }
-label {
-    display: block;
-    margin-bottom: 10px;
+
+h1:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #1976d2, #0d47a1);
+    border-radius: 2px;
 }
-input[type=text], input[type=email], textarea {
-    width: 100%;
-    padding: 6px 8px;
-    margin-top: 2px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 15px;
-}
-button {
-    background: #0066cc;
-    color: #fff;
+
+.card {
+    margin-bottom: 24px;
+    border-radius: 12px;
     border: none;
-    padding: 8px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-button:hover {
-    background: #004999;
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
-hr {
-    margin: 18px 0;
+
+.card-body {
+    padding: 32px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1565c0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    display: block;
+}
+
+.form-control, .form-select {
+    font-size: 1rem;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    background: #f9fafb;
+    transition: all 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.15);
+    background: #fff;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.dynamic-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+/* Improved vertical stacking and spacing for dynamic-section form rows */
+.dynamic-section .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f8f9fa;
+    padding: 24px 20px;
+    border-radius: 10px;
+    border-left: 4px solid #1976d2;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.04);
+}
+
+.btn-section {
+    margin-top: 12px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-section i {
+    transition: transform 0.2s;
+}
+
+.btn-section:hover i {
+    transform: translateX(3px);
+}
+
+.remove-btn {
+    background: #fff;
+    color: #d32f2f;
+    border: 1px solid #d32f2f;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.remove-btn:hover {
+    background: #d32f2f;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.remove-btn i {
+    font-size: 0.8rem;
+}
+
+.btn-lg {
+    padding: 12px 28px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.invalid-feedback {
+    margin-top: -16px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 24px;
+        margin: 20px auto;
+    }
+    
+    .card-body {
+        padding: 24px;
+    }
+    
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+    
+    .d-flex.justify-content-center {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 16px;
+        margin: 10px auto;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .form-control, .form-select {
+        padding: 10px 14px;
+    }
+}
+/* Make dynamic-section form rows stack vertically and add spacing */
+.dynamic-section .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #1976d2;
+    margin-bottom: 16px;
+}
+
+/* Ensure inputs in dynamic sections take full width */
+/* Ensure all inputs/selects in dynamic-section form rows are full width and spaced */
+.dynamic-section .form-row .form-control,
+.dynamic-section .form-row .form-select {
+    width: 100%;
+    margin-bottom: 0;
+    min-width: 0;
+}
+
+/* Shared dynamic entry layout */
+.edu-entry,
+.exp-entry,
+.proj-entry,
+.skill-entry,
+.cert-entry,
+.co-entry,
+.extra-entry,
+.pub-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border-left: 4px solid #1565c0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure label blocks are stacked nicely */
+.edu-entry label,
+.exp-entry label,
+.proj-entry label,
+.skill-entry label,
+.cert-entry label,
+.co-entry label,
+.extra-entry label,
+.pub-entry label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Style the select and checkbox groups in date fields */
+.edu-entry select,
+.exp-entry select,
+.proj-entry select,
+.co-entry select,
+.extra-entry select,
+.pub-entry select {
+    margin-top: 6px;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    background: #fff;
+}
+
+input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+/* Textareas should be consistent */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    background: #fefefe;
+}
+
+/* Remove button styling */
+.edu-entry button,
+.exp-entry button,
+.proj-entry button,
+.skill-entry button,
+.cert-entry button,
+.co-entry button,
+.extra-entry button,
+.pub-entry button {
+    align-self: flex-start;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    border: 1px solid #d32f2f;
+    background: transparent;
+    color: #d32f2f;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.edu-entry button:hover,
+.exp-entry button:hover,
+.proj-entry button:hover,
+.skill-entry button:hover,
+.cert-entry button:hover,
+.co-entry button:hover,
+.extra-entry button:hover,
+.pub-entry button:hover {
+    background: #d32f2f;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Add HR spacing */
+.edu-entry hr,
+.exp-entry hr,
+.proj-entry hr,
+.skill-entry hr,
+.cert-entry hr,
+.co-entry hr,
+.extra-entry hr,
+.pub-entry hr {
+    margin-top: 20px;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .edu-entry,
+    .exp-entry,
+    .proj-entry,
+    .skill-entry,
+    .cert-entry,
+    .co-entry,
+    .extra-entry,
+    .pub-entry {
+        padding: 16px;
+    }
+
+    .edu-entry label,
+    .exp-entry label,
+    .proj-entry label,
+    .skill-entry label,
+    .cert-entry label,
+    .co-entry label,
+    .extra-entry label,
+    .pub-entry label {
+        font-size: 0.95rem;
+    }
 }
