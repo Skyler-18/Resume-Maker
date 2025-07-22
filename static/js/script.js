@@ -7,7 +7,7 @@ function getMonthOptions() {
 
 function getYearOptions() {
     let options = '';
-    for (let i = currentYear; i >= currentYear - 100; i--) {
+    for (let i = currentYear + 50; i >= currentYear - 100; i--) {
         options += `<option value="${i}">${i}</option>`;
     }
     return options;
