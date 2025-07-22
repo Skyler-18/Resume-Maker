@@ -6,10 +6,15 @@ import os
 import datetime
 
 app = Flask(__name__)
+
 app.secret_key = 'your_secret_key'  # Needed for flash messages
 
 # GENERATED_FOLDER = os.path.join('static', 'generated')
 GENERATED_FOLDER = os.path.join('/tmp/generated')  # Use a temporary directory for generated files
+
+# Ensure the generated folder exists at startup (for all environments)
+if not os.path.exists(GENERATED_FOLDER):
+    os.makedirs(GENERATED_FOLDER)
 
 @app.route('/', methods=['GET'])
 def index():
