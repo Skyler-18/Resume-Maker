@@ -2,12 +2,14 @@ from flask import Flask, render_template, request, send_from_directory, redirect
 from utils.pdf_generator import generate_pdf
 from utils.docx_generator import generate_docx
 import os
-import uuid
+# import uuid
+import datetime
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for flash messages
 
-GENERATED_FOLDER = os.path.join('static', 'generated')
+# GENERATED_FOLDER = os.path.join('static', 'generated')
+GENERATED_FOLDER = os.path.join('/tmp/generated')  # Use a temporary directory for generated files
 
 @app.route('/', methods=['GET'])
 def index():
@@ -20,8 +22,9 @@ def generate():
     for k, v in form_data.items():
         if len(v) == 1:
             form_data[k] = v[0]
-    # Generate a unique filename
-    filename = f"resume_{uuid.uuid4().hex}.pdf"
+
+    now = datetime.datetime.now().strftime('%d%m%Y_%H%M%S')
+    filename = f"{now}_Resume.pdf"
     output_path = os.path.join(GENERATED_FOLDER, filename)
     # Generate PDF
     generate_pdf(form_data, output_path)
@@ -33,7 +36,16 @@ def generate_docx_route():
     for k, v in form_data.items():
         if len(v) == 1:
             form_data[k] = v[0]
-    filename = f"resume_{uuid.uuid4().hex}.docx"
+    import datetime
+    user_filename = form_data.get('filename', None)
+    if user_filename:
+        user_filename = user_filename.replace(' ', '_').replace('/', '_').replace('\\', '_')
+        if not user_filename.lower().endswith('.docx'):
+            user_filename += '.docx'
+        filename = user_filename
+    else:
+        now = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"{now}_Resume.docx"
     output_path = os.path.join(GENERATED_FOLDER, filename)
     generate_docx(form_data, output_path)
     return jsonify({'url': url_for('download', filename=filename)})
