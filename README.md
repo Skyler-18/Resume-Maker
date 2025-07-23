@@ -27,18 +27,6 @@
 
 ---
 
-## 🖼️ Screenshots
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/placeholder/landing.png" alt="Landing Page" width="700"/>
-  <br><em>Landing Page</em>
-  <br><br>
-  <img src="https://user-images.githubusercontent.com/placeholder/form.png" alt="Resume Form" width="700"/>
-  <br><em>Resume Form (Responsive)</em>
-</p>
-
----
-
 ## 🛠️ Tech Stack
 
 - **Frontend**: HTML5, CSS3 (Bootstrap 5, custom styles), JavaScript
