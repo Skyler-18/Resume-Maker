@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResuMint | ATS Friendly Resume Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            background: linear-gradient(120deg, #e3f0ff 0%, #f9f9f9 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .hero {
+            padding: 64px 0 48px 0;
+            text-align: center;
+            background: linear-gradient(90deg, #1976d2 0%, #0d47a1 100%);
+            color: #fff;
+            border-radius: 0 0 48px 48px;
+            box-shadow: 0 8px 32px rgba(25, 118, 210, 0.10);
+        }
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        .hero-sub {
+            font-size: 1.35rem;
+            font-weight: 400;
+            margin-bottom: 32px;
+            color: #e3f0ff;
+        }
+        .features {
+            margin: 48px auto 0 auto;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+        }
+        .feature-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
+            padding: 32px 28px;
+            flex: 1 1 260px;
+            min-width: 260px;
+            max-width: 320px;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(25, 118, 210, 0.16);
+        }
+        .feature-icon {
+            font-size: 2.2rem;
+            color: #1976d2;
+            margin-bottom: 16px;
+        }
+        .feature-title {
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0d47a1;
+        }
+        .feature-desc {
+            font-size: 1rem;
+            color: #444;
+        }
+        .cta-btns {
+            margin-top: 40px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            font-size: 1.18rem;
+            font-weight: 700;
+            padding: 16px 38px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(90deg, #1976d2 0%, #0d47a1 100%);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(25, 118, 210, 0.10);
+            transition: background 0.18s, transform 0.18s;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, #0d47a1 0%, #1976d2 100%);
+            transform: translateY(-2px) scale(1.04);
+            color: #fff;
+        }
+        .demo-btn {
+            background: #fff;
+            color: #1976d2;
+            border: 2px solid #1976d2;
+        }
+        .demo-btn:hover {
+            background: #1976d2;
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.1rem; }
+            .features { flex-direction: column; gap: 18px; }
+            .feature-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-title">
+            <i class="fas fa-file-alt me-2"></i>ResuMint <span style="font-size:1.1rem;font-weight:500;letter-spacing:0.5px;">— ATS Friendly Resume Generator</span>
+        </div>
+        <div class="hero-sub">
+            Create your professional resume in minutes!<br>
+            Our template is trusted by top companies worldwide and is designed to pass Applicant Tracking Systems (ATS) with ease.<br>
+            Get a beautifully formatted PDF or a customizable DOCX—no design skills needed.
+        </div>
+        <div class="cta-btns">
+            <a href="{{ url_for('resume_form') }}" class="cta-btn"><i class="fas fa-pen-nib me-2"></i>Start Creating Resume</a>
+            <a href="{{ url_for('demo_resume') }}" class="cta-btn demo-btn"><i class="fas fa-eye me-2"></i>View Demo Resume</a>
+        </div>
+    </div>
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="feature-title">ATS Optimized</div>
+            <div class="feature-desc">Our template is designed to pass Applicant Tracking Systems used by Fortune 500 companies and top recruiters.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-file-pdf"></i></div>
+            <div class="feature-title">Professional PDF & DOCX</div>
+            <div class="feature-desc">Download your resume as a perfectly formatted PDF or a DOCX for easy customization in MS Word.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-magic"></i></div>
+            <div class="feature-title">Easy & Fast</div>
+            <div class="feature-desc">Just fill out a simple form—no design or formatting required. Get your resume instantly!</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-paint-brush"></i></div>
+            <div class="feature-title">Modern, Clean Layout</div>
+            <div class="feature-desc">Sections, spacing, fonts, and layout are all optimized for clarity and professionalism.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-user-edit"></i></div>
+            <div class="feature-title">Customizable</div>
+            <div class="feature-desc">Download as DOCX to make further edits or add custom sections as you wish.</div>
+        </div>
+    </div>
+    <div class="text-center mt-5 mb-4" style="color:#888;font-size:1.08rem;">
+        <i class="fas fa-info-circle me-2"></i>
+        <span>For the best results, use the PDF option for a polished, ready-to-use resume. DOCX is best for custom edits.</span>
+    </div>
+</body>
+</html>

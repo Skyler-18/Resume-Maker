@@ -5,20 +5,31 @@ import os
 # import uuid
 import datetime
 
+
+
 app = Flask(__name__)
-
 app.secret_key = 'your_secret_key'  # Needed for flash messages
-
 # GENERATED_FOLDER = os.path.join('static', 'generated')
 GENERATED_FOLDER = os.path.join('/tmp/generated')  # Use a temporary directory for generated files
-
 # Ensure the generated folder exists at startup (for all environments)
 if not os.path.exists(GENERATED_FOLDER):
     os.makedirs(GENERATED_FOLDER)
 
+# Serve /favicon.ico from static folder for browser compatibility
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/x-icon')
+
+# Landing page
 @app.route('/', methods=['GET'])
-def index():
+def landing():
+    return render_template('landing.html')
+
+# Resume form page (old root)
+@app.route('/resume', methods=['GET'])
+def resume_form():
     return render_template('index.html')
+
 
 @app.route('/generate', methods=['POST'])
 def generate():
@@ -34,6 +45,7 @@ def generate():
     # Generate PDF
     generate_pdf(form_data, output_path)
     return redirect(url_for('download', filename=filename))
+
 
 @app.route('/generate-docx', methods=['POST'])
 def generate_docx_route():
@@ -55,9 +67,19 @@ def generate_docx_route():
     generate_docx(form_data, output_path)
     return jsonify({'url': url_for('download', filename=filename)})
 
+
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory(GENERATED_FOLDER, filename, as_attachment=True)
+
+# Route to serve the demo resume PDF from templates folder
+@app.route('/demo-resume')
+def demo_resume():
+    # Demo-Resume.pdf is in templates folder
+    demo_path = os.path.join(app.root_path, 'templates', 'Demo-Resume.pdf')
+    if not os.path.exists(demo_path):
+        return "Demo resume not found.", 404
+    return send_from_directory(os.path.join(app.root_path, 'templates'), 'Demo-Resume.pdf', as_attachment=False)
 
 if __name__ == '__main__':
     if not os.path.exists(GENERATED_FOLDER):
