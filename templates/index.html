@@ -1,4 +1,6 @@
-    <!-- DOCX Warning at bottom -->
+<!-- Floating warning for all validation messages -->
+<div id="floating-warning" class="alert alert-warning" style="display:none; position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 320px; max-width: 90vw; text-align: center; font-size: 1.1rem; box-shadow: 0 2px 12px rgba(0,0,0,0.12);"></div>
+<!-- DOCX Warning at bottom -->
     <div id="docx-warning" class="alert alert-warning mt-3" style="display:none; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); z-index: 9999; min-width: 320px; max-width: 90vw; text-align: center;">
       <strong>Notice:</strong> The DOCX file is provided for your convenience to make minor edits and customizations to your resume content. Please note that the formatting and layout may differ from the PDF version, and some styles may not be preserved. For the best appearance, use the PDF. The DOCX is best for editing text and making small changes.
     </div>
@@ -22,33 +24,33 @@
                     <div class="section-title"><i class="fas fa-user me-2"></i>Personal Details</div>
                     <div class="form-stack">
                         <div>
-                            <label class="form-label">Your Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="your_name" required maxlength="60">
+                            <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="your_name" required maxlength="30" oninput="showLimitWarning(this, 30)" placeholder="Enter your full name as you want it to appear on your resume">
                             <div class="invalid-feedback">Name is required.</div>
                         </div>
                         <div>
-                            <label class="form-label">Phone <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" name="phone" required pattern="^[0-9\-\+\s]{10,10}$" maxlength="10">
+                            <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" name="phone" required pattern="^[0-9\-\+\s]{10,10}$" maxlength="10" placeholder="10-digit mobile number">
                             <div class="invalid-feedback">Enter a valid 10-digit phone number.</div>
                         </div>
                         <div>
-                            <label class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" name="email" required>
+                            <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="email" required placeholder="e.g. you@example.com">
                             <div class="invalid-feedback">Enter a valid email address.</div>
                         </div>
                         <div>
-                            <label class="form-label">LinkedIn <span class="text-danger">*</span></label>
-                            <input type="url" class="form-control" name="linkedin" pattern="https?://.+">
-                            <div class="invalid-feedback">Enter a valid LinkedIn URL (must start with http:// or https://).</div>
+                            <label class="form-label">LinkedIn Profile</label>
+                            <input type="url" class="form-control" name="linkedin" pattern="^https://(www\.)?linkedin\.com/.+" placeholder="e.g. https://linkedin.com/in/yourprofile">
+                            <div class="invalid-feedback">Enter a valid LinkedIn URL (must start with https://linkedin.com/ and include your profile path).</div>
                         </div>
                         <div>
-                            <label class="form-label">GitHub <span class="text-danger">*</span></label>
-                            <input type="url" class="form-control" name="github" pattern="https?://.+">
-                            <div class="invalid-feedback">Enter a valid GitHub URL (must start with http:// or https://).</div>
+                            <label class="form-label">GitHub Profile</label>
+                            <input type="url" class="form-control" name="github" pattern="^https://(www\.)?github\.com/.+" placeholder="e.g. https://github.com/yourusername">
+                            <div class="invalid-feedback">Enter a valid GitHub URL (must start with https://github.com/ and include your username/repo).</div>
                         </div>
                         <div>
-                            <label class="form-label">Website <span class="text-secondary">(Optional)</span></label>
-                            <input type="url" class="form-control" name="website" pattern="https?://.+">
+                            <label class="form-label">Personal Website <span class="text-secondary">(Optional)</span></label>
+                            <input type="url" class="form-control" name="website" pattern="https?://.+" placeholder="e.g. https://yourwebsite.com">
                             <div class="invalid-feedback">Enter a valid Website URL (must start with http:// or https://).</div>
                         </div>
                     </div>
@@ -59,7 +61,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="section-title"><i class="fas fa-align-left me-2"></i>Summary</div>
-                    <textarea class="form-control" name="summary" rows="4" maxlength="400" placeholder="Write a brief summary about yourself..."></textarea>
+                    <textarea class="form-control" name="summary" rows="4" maxlength="400" placeholder="A professional summary that highlights the role that you are applying for and why you are the perfect fit for the role both from the skills perspective and the personality perspective." oninput="showLimitWarning(this, 400)"></textarea>
                     <div class="invalid-feedback">Summary is required.</div>
                 </div>
             </div>
@@ -159,11 +161,11 @@
                     <div class="form-stack">
                         <div>
                             <label class="form-label">Section Heading:</label>
-                            <input type="text" class="form-control" name="custom_heading" placeholder="Enter section title">
+                            <input type="text" class="form-control" name="custom_heading" maxlength="30" oninput="showLimitWarning(this, 30)">
                         </div>
                         <div>
-                            <label class="form-label">Points (one per line):</label>
-                            <textarea class="form-control" name="custom_points" rows="3" placeholder="Enter each point on a new line"></textarea>
+                            <label class="form-label">Description:</label>
+                            <textarea class="form-control" name="custom_points" rows="3" placeholder="Press Enter for each new point. Max 10 points, 150 characters each."></textarea>
                         </div>
                     </div>
                 </div>
@@ -183,14 +185,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script>
-      document.getElementById('generate-docx').addEventListener('click', function(e) {
-        var warning = document.getElementById('docx-warning');
-        warning.style.display = 'block';
-        setTimeout(function() {
-          warning.style.display = 'none';
-        }, 14000);
-      });
-    </script>
+    <!-- JS validation and scroll logic moved to script.js -->
+
+    <div class="alert alert-info mt-4" style="max-width: 700px; margin: 0 auto 50px auto; font-size: 1.08rem; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.07);">
+      <strong>Note:</strong> For the best results, use the <span style="color:#1976d2;font-weight:600;">PDF</span> option to generate your resume with optimal formatting, spacing, and layout. The <span style="color:#1565c0;font-weight:600;">DOCX</span> file contains all your content but may lose some formatting and style. The DOCX is recommended only if you wish to make custom edits or add sections not supported by this generator. For a polished, ready-to-use resume, always prefer the PDF version. Use DOCX only for advanced customizations that cannot be achieved through this generator.
+    </div>
 </body>
 </html>
