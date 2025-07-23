@@ -255,7 +255,14 @@
           {% else %}
             <strong>"{{ pub.title }}"</strong>
           {% endif %}
-          , {{ pub.author }}, {{ pub.journal }}, {{ pub.date }}
+          , {{ pub.author }}, {{ pub.journal }},
+          {% if pub.pub_month or pub.pub_year %}
+            {{ pub.pub_month }}{% if pub.pub_month and pub.pub_year %} {{ pub.pub_year }}{% elif pub.pub_year %}{{ pub.pub_year }}{% endif %}
+          {% elif pub.date %}
+            {{ pub.date }}
+          {% else %}
+            N/A
+          {% endif %}
         </li>
         {% endfor %}
       </ul>

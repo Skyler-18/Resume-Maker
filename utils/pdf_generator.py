@@ -39,7 +39,7 @@ def parse_experience(form_data):
         start_date, end_date = get_date_string(form_data, 'experience', idx)
         items.append({
             'role': form_data.get(f'experience_role_{idx}', ''),
-            'role_link': form_data.get(f'experience_role_link_${idx}', ''),
+            'role_link': form_data.get(f'experience_role_link_{idx}', ''),
             'org': form_data.get(f'experience_org_{idx}', ''),
             'city': form_data.get(f'experience_city_{idx}', ''),
             'state': form_data.get(f'experience_state_{idx}', ''),
@@ -115,12 +115,23 @@ def parse_publications(form_data):
     items = []
     idx = 0
     while f'pub_title_{idx}' in form_data:
+        pub_month = form_data.get(f'pub_month_{idx}', '')
+        pub_year = form_data.get(f'pub_year_{idx}', '')
+        date = ''
+        if pub_month and pub_year:
+            date = f"{pub_month} {pub_year}"
+        elif pub_year:
+            date = pub_year
+        elif pub_month:
+            date = pub_month
+        else:
+            date = form_data.get(f'pub_date_{idx}', '')
         items.append({
             'title': form_data.get(f'pub_title_{idx}', ''),
             'link': form_data.get(f'pub_link_{idx}', ''),
             'author': form_data.get(f'pub_author_{idx}', ''),
             'journal': form_data.get(f'pub_journal_{idx}', ''),
-            'date': form_data.get(f'pub_date_{idx}', ''),
+            'date': date,
         })
         idx += 1
     return [e for e in items if any(e.values())]

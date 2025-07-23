@@ -48,6 +48,7 @@ function addEducation() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addExperience() {
@@ -56,7 +57,10 @@ function addExperience() {
     section.insertAdjacentHTML('beforeend', `
         <div class="exp-entry">
             <label>Job Title: <input type="text" name="experience_role_${idx}" maxlength="50" required class="form-control" oninput="showLimitWarning(this, 50)" placeholder="e.g. Software Engineer"></label>
-            <label>Role Link (optional): <input type="text" name="experience_role_link_${idx}" class="form-control" placeholder="e.g. https://company.com/job-description"></label>
+            <label>Role Link (optional):
+                <input type="url" name="experience_role_link_${idx}" class="form-control" placeholder="e.g. https://company.com/job-description" pattern="https?://.+">
+                <div class="invalid-feedback" style="display:none;color:#d32f2f;font-size:0.97em;margin-top:-6px;margin-bottom:6px;">Please enter a valid URL (starting with http:// or https://)</div>
+            </label>
             <label>Organization: <input type="text" name="experience_org_${idx}" maxlength="40" required class="form-control" oninput="showLimitWarning(this, 40)" placeholder="e.g. Google"></label>
             <label>City: <input type="text" name="experience_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Mountain View"></label>
             <label>State: <input type="text" name="experience_state_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. California"></label>
@@ -67,6 +71,7 @@ function addExperience() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addProject() {
@@ -75,9 +80,11 @@ function addProject() {
     section.insertAdjacentHTML('beforeend', `
         <div class="proj-entry">
             <label>Project Title: <input type="text" name="project_name_${idx}" maxlength="40" required class="form-control" oninput="showLimitWarning(this, 40)" placeholder="e.g. Resume Generator App"></label>
-            <label>Project Link (optional): <input type="text" name="project_link_${idx}" class="form-control" placeholder="e.g. https://github.com/yourusername/project"></label>
+            <label>Project Link (optional):
+                <input type="url" name="project_link_${idx}" class="form-control" placeholder="e.g. https://github.com/yourusername/project" pattern="https?://.+">
+                <div class="invalid-feedback" style="display:none;color:#d32f2f;font-size:0.97em;margin-top:-6px;margin-bottom:6px;">Please enter a valid URL (starting with http:// or https://)</div>
+            </label>
             <label>Tech Stack: <input type="text" name="project_tech_${idx}" maxlength="35" required class="form-control" oninput="showLimitWarning(this, 35)" placeholder="e.g. Python, Flask, React"></label>
-            <label>City: <input type="text" name="project_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Remote"></label>
             ${generateDateFields('project', idx, true)}
             <label>Description: <textarea name="project_bullets_${idx}" placeholder="Press Enter for each new point. Max 4 points, 150 characters each. e.g. Built a web app for resume generation." rows="4" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 4, 150)" onblur="validateBullets(this, 4, 150)"></textarea></label>
             <div class="alert alert-warning" style="display:none"></div>
@@ -85,6 +92,7 @@ function addProject() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addCoCurricular() {
@@ -97,7 +105,10 @@ function addCoCurricular() {
     section.insertAdjacentHTML('beforeend', `
         <div class="co-entry">
             <label>Activity Title: <input type="text" name="co_activity_${idx}" maxlength="50" required class="form-control" oninput="showLimitWarning(this, 50)" placeholder="e.g. Debate Competition"></label>
-            <label>Activity Link (optional): <input type="text" name="co_link_${idx}" class="form-control" placeholder="e.g. https://event.com/details"></label>
+            <label>Activity Link (optional):
+                <input type="url" name="co_link_${idx}" class="form-control" placeholder="e.g. https://event.com/details" pattern="https?://.+">
+                <div class="invalid-feedback" style="display:none;color:#d32f2f;font-size:0.97em;margin-top:-6px;margin-bottom:6px;">Please enter a valid URL (starting with http:// or https://)</div>
+            </label>
             <label>Organization: <input type="text" name="co_org_${idx}" maxlength="30" required class="form-control" oninput="showLimitWarning(this, 30)" placeholder="e.g. College Literary Club"></label>
             <label>City: <input type="text" name="co_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Mumbai"></label>
             <label>State: <input type="text" name="co_state_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Maharashtra"></label>
@@ -108,6 +119,7 @@ function addCoCurricular() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addExtraCurricular() {
@@ -120,7 +132,10 @@ function addExtraCurricular() {
     section.insertAdjacentHTML('beforeend', `
         <div class="extra-entry">
             <label>Activity Title: <input type="text" name="extra_activity_${idx}" maxlength="50" required class="form-control" oninput="showLimitWarning(this, 50)" placeholder="e.g. Football Tournament"></label>
-            <label>Activity Link (optional): <input type="text" name="extra_link_${idx}" class="form-control" placeholder="e.g. https://event.com/details"></label>
+            <label>Activity Link (optional):
+                <input type="url" name="extra_link_${idx}" class="form-control" placeholder="e.g. https://event.com/details" pattern="https?://.+">
+                <div class="invalid-feedback" style="display:none;color:#d32f2f;font-size:0.97em;margin-top:-6px;margin-bottom:6px;">Please enter a valid URL (starting with http:// or https://)</div>
+            </label>
             <label>Organization: <input type="text" name="extra_org_${idx}" maxlength="30" required class="form-control" oninput="showLimitWarning(this, 30)" placeholder="e.g. Sports Club"></label>
             <label>City: <input type="text" name="extra_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Bangalore"></label>
             <label>State: <input type="text" name="extra_state_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Karnataka"></label>
@@ -131,6 +146,7 @@ function addExtraCurricular() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addPublication() {
@@ -143,7 +159,10 @@ function addPublication() {
     section.insertAdjacentHTML('beforeend', `
         <div class="pub-entry">
             <label>Publication Title: <input type="text" name="pub_title_${idx}" required class="form-control" maxlength="70" oninput="showLimitWarning(this, 70)" placeholder="e.g. Deep Learning for NLP"></label>
-            <label>Publication Link (optional): <input type="text" name="pub_link_${idx}" class="form-control" placeholder="e.g. https://journal.com/article"></label>
+            <label>Publication Link (optional):
+                <input type="url" name="pub_link_${idx}" class="form-control" placeholder="e.g. https://journal.com/article" pattern="https?://.+">
+                <div class="invalid-feedback" style="display:none;color:#d32f2f;font-size:0.97em;margin-top:-6px;margin-bottom:6px;">Please enter a valid URL (starting with http:// or https://)</div>
+            </label>
             <label>Your Name: <input type="text" name="pub_author_${idx}" required class="form-control" maxlength="30" oninput="showLimitWarning(this, 30)" placeholder="e.g. John Doe"></label>
             <label>Journal: <input type="text" name="pub_journal_${idx}" required class="form-control" maxlength="40" oninput="showLimitWarning(this, 40)" placeholder="e.g. International Journal of AI"></label>
             <label>Date:
@@ -155,6 +174,7 @@ function addPublication() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addSkillGroup() {
@@ -173,6 +193,7 @@ function addSkillGroup() {
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 function addCertification() {
@@ -185,13 +206,17 @@ function addCertification() {
     section.insertAdjacentHTML('beforeend', `
         <div class="cert-entry">
             <label>Certification Name: <input type="text" name="cert_name_${idx}" required class="form-control" maxlength="60" oninput="showLimitWarning(this, 60)" placeholder="e.g. AWS Certified Solutions Architect"></label>
-            <label>Certification Link (optional): <input type="text" name="cert_link_${idx}" class="form-control" placeholder="e.g. https://certification.com/verify"></label>
+            <label>Certification Link (optional):
+                <input type="url" name="cert_link_${idx}" class="form-control" placeholder="e.g. https://certification.com/verify" pattern="https?://.+">
+                <div class="invalid-feedback" style="display:none;color:#d32f2f;font-size:0.97em;margin-top:-6px;margin-bottom:6px;">Please enter a valid URL (starting with http:// or https://)</div>
+            </label>
             <label>Issuing Organization: <input type="text" name="cert_org_${idx}" required class="form-control" maxlength="40" oninput="showLimitWarning(this, 40)" placeholder="e.g. Amazon Web Services"></label>
             <div class="alert alert-warning" style="display:none"></div>
             <button type="button" onclick="this.parentElement.remove()">Remove</button>
             <hr>
         </div>
     `);
+    addInstantValidation(section.lastElementChild);
 }
 
 // Ensure at least one education and one skill group are always present
@@ -229,19 +254,30 @@ function removeEntry(btn, sectionId) {
 })();
 
 // Instant feedback for dynamic fields
-function addInstantValidation() {
-    document.querySelectorAll('input, textarea, select').forEach(function(input) {
+function addInstantValidation(container) {
+    const root = container || document;
+    root.querySelectorAll('input, textarea, select').forEach(function(input) {
         input.addEventListener('input', function() {
-            input.setCustomValidity('');
-            if (!input.checkValidity()) {
-                input.classList.add('is-invalid');
-            } else {
-                input.classList.remove('is-invalid');
+            // For URL fields, show/hide .is-invalid and .invalid-feedback in real time
+            if (input.type === 'url' && input.pattern) {
+                if (input.value.length > 0 && !input.checkValidity()) {
+                    input.classList.add('is-invalid');
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            }
+            // For required fields, show/hide .is-invalid in real time
+            if (input.required) {
+                if (!input.checkValidity()) {
+                    input.classList.add('is-invalid');
+                } else {
+                    input.classList.remove('is-invalid');
+                }
             }
         });
     });
 }
-window.addEventListener('DOMContentLoaded', addInstantValidation);
+window.addEventListener('DOMContentLoaded', function() { addInstantValidation(); });
 
 // DOCX generation logic
 window.addEventListener('DOMContentLoaded', function() {

@@ -154,10 +154,18 @@ textarea.form-control {
     border-radius: 8px;
 }
 
+/* Always show .invalid-feedback if .is-invalid is present, regardless of .was-validated */
+.is-invalid ~ .invalid-feedback,
+input.is-invalid + .invalid-feedback,
+textarea.is-invalid + .invalid-feedback,
+select.is-invalid + .invalid-feedback {
+    display: block !important;
+}
 .invalid-feedback {
     margin-top: -16px;
     margin-bottom: 12px;
     font-size: 0.85rem;
+    display: none;
 }
 
 @media (max-width: 768px) {
