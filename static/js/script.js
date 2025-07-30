@@ -65,7 +65,7 @@ function addExperience() {
             <label>City: <input type="text" name="experience_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Mountain View"></label>
             <label>State: <input type="text" name="experience_state_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. California"></label>
             ${generateDateFields('experience', idx, true)}
-            <label>Description: <textarea name="experience_bullets_${idx}" placeholder="Press Enter for each new point. Max 4 points, 150 characters each. e.g. Developed scalable backend services." rows="3" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 4, 150)" onblur="validateBullets(this, 4, 150)"></textarea></label>
+            <label>Description: <textarea name="experience_bullets_${idx}" placeholder="Press Enter for each new point. Max 5 points, 250 characters each. e.g. Developed scalable backend services." rows="5" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 5, 250)" onblur="validateBullets(this, 5, 250)"></textarea></label>
             <div class="alert alert-warning" style="display:none"></div>
             <button type="button" onclick="this.parentElement.remove()">Remove</button>
             <hr>
@@ -86,7 +86,7 @@ function addProject() {
             </label>
             <label>Tech Stack: <input type="text" name="project_tech_${idx}" maxlength="35" required class="form-control" oninput="showLimitWarning(this, 35)" placeholder="e.g. Python, Flask, React"></label>
             ${generateDateFields('project', idx, true)}
-            <label>Description: <textarea name="project_bullets_${idx}" placeholder="Press Enter for each new point. Max 4 points, 150 characters each. e.g. Built a web app for resume generation." rows="4" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 4, 150)" onblur="validateBullets(this, 4, 150)"></textarea></label>
+            <label>Description: <textarea name="project_bullets_${idx}" placeholder="Press Enter for each new point. Max 5 points, 250 characters each. e.g. Built a web app for resume generation." rows="5" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 5, 250)" onblur="validateBullets(this, 5, 250)"></textarea></label>
             <div class="alert alert-warning" style="display:none"></div>
             <button type="button" onclick="this.parentElement.remove()">Remove</button>
             <hr>
@@ -113,7 +113,7 @@ function addCoCurricular() {
             <label>City: <input type="text" name="co_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Mumbai"></label>
             <label>State: <input type="text" name="co_state_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Maharashtra"></label>
             ${generateDateFields('co', idx, true)}
-            <label>Description: <textarea name="co_bullets_${idx}" placeholder="Press Enter for each new point. Max 4 points, 150 characters each. e.g. Won 1st prize among 100+ participants." rows="3" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 4, 150)" onblur="validateBullets(this, 4, 150)"></textarea></label>
+            <label>Description: <textarea name="co_bullets_${idx}" placeholder="Press Enter for each new point. Max 5 points, 250 characters each. e.g. Won 1st prize among 100+ participants." rows="5" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 5, 250)" onblur="validateBullets(this, 5, 250)"></textarea></label>
             <div class="alert alert-warning" style="display:none"></div>
             <button type="button" onclick="this.parentElement.remove()">Remove</button>
             <hr>
@@ -140,7 +140,7 @@ function addExtraCurricular() {
             <label>City: <input type="text" name="extra_city_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Bangalore"></label>
             <label>State: <input type="text" name="extra_state_${idx}" maxlength="20" required class="form-control" oninput="showLimitWarning(this, 20)" placeholder="e.g. Karnataka"></label>
             ${generateDateFields('extra', idx, true)}
-            <label>Description: <textarea name="extra_bullets_${idx}" placeholder="Press Enter for each new point. Max 4 points, 150 characters each. e.g. Led the team to finals." rows="3" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 4, 150)" onblur="validateBullets(this, 4, 150)"></textarea></label>
+            <label>Description: <textarea name="extra_bullets_${idx}" placeholder="Press Enter for each new point. Max 5 points, 250 characters each. e.g. Led the team to finals." rows="5" style="resize: vertical; max-width: 100%;" required class="form-control" oninput="validateBullets(this, 5, 250)" onblur="validateBullets(this, 5, 250)"></textarea></label>
             <div class="alert alert-warning" style="display:none"></div>
             <button type="button" onclick="this.parentElement.remove()">Remove</button>
             <hr>
@@ -186,8 +186,8 @@ function addSkillGroup() {
     const idx = section.children.length;
     section.insertAdjacentHTML('beforeend', `
         <div class="skill-entry">
-            <label>Skill Category <span class="text-danger">*</span> <input type="text" name="skill_heading_${idx}" required class="form-control" maxlength="25" oninput="showLimitWarning(this, 25)" placeholder="e.g. Programming Languages"></label>
-            <label>Skills (comma separated, max 7, 20 chars each) <span class="text-danger">*</span> <input type="text" name="skill_list_${idx}" required class="form-control" oninput="validateSkills(this)" placeholder="e.g. Python, Java, C++"></label>
+            <label>Skill Category <span class="text-danger">*</span> <input type="text" name="skill_heading_${idx}" required class="form-control" maxlength="40" oninput="showLimitWarning(this, 40)" placeholder="e.g. Programming Languages"></label>
+            <label>Skills (comma separated, max 10, 40 chars each) <span class="text-danger">*</span> <input type="text" name="skill_list_${idx}" required class="form-control" oninput="validateSkills(this)" placeholder="e.g. Python, Java, C++"></label>
             <div class="alert alert-warning" style="display:none"></div>
             <button type="button" class="btn btn-outline-danger remove-btn" onclick="removeEntry(this, 'skills-section')">Remove</button>
             <hr>
@@ -345,17 +345,17 @@ function showLimitWarning(input, limit) {
     }
 }
 
-// Validate skills: max 7 skills, 20 chars each
+// Validate skills: max 10 skills, 40 chars each
 function validateSkills(input) {
     let skills = input.value.split(',').map(s => s.trim()).filter(s => s);
-    if (skills.length > 7) {
-        showFloatingWarning('You can add up to 7 skills only.');
-        input.value = skills.slice(0, 7).join(', ');
+    if (skills.length > 10) {
+        showFloatingWarning('You can add up to 10 skills only.');
+        input.value = skills.slice(0, 10).join(', ');
     }
     for (let skill of skills) {
-        if (skill.length > 20) {
-            showFloatingWarning('Each skill can be up to 20 characters only.');
-            input.value = skills.map(s => s.slice(0, 20)).join(', ');
+        if (skill.length > 40) {
+            showFloatingWarning('Each skill can be up to 40 characters only.');
+            input.value = skills.map(s => s.slice(0, 40)).join(', ');
             break;
         }
     }
@@ -381,23 +381,23 @@ function validateBullets(textarea, maxBullets, maxChars) {
 window.addEventListener('DOMContentLoaded', function() {
     const customHeading = document.querySelector('input[name="custom_heading"]');
     if (customHeading) {
-        customHeading.setAttribute('maxlength', '30');
+        customHeading.setAttribute('maxlength', '40');
         customHeading.setAttribute('placeholder', 'e.g. Awards & Achievements');
         customHeading.addEventListener('input', function() {
-            if (customHeading.value.length >= 30) {
-                showFloatingWarning('Custom section heading can be up to 30 characters only.');
+            if (customHeading.value.length >= 40) {
+                showFloatingWarning('Custom section heading can be up to 40 characters only.');
             }
         });
     }
     const customPoints = document.querySelector('textarea[name="custom_points"]');
     if (customPoints) {
         customPoints.removeAttribute('maxlength');
-        customPoints.setAttribute('placeholder', 'Press Enter for each new point. Max 10 points, 150 characters each. e.g. Received XYZ Scholarship for academic excellence.');
+        customPoints.setAttribute('placeholder', 'Press Enter for each new point. Max 10 points, 300 characters each. e.g. Received XYZ Scholarship for academic excellence.');
         customPoints.addEventListener('input', function() {
-            validateBullets(customPoints, 10, 150);
+            validateBullets(customPoints, 10, 300);
         });
         customPoints.addEventListener('blur', function() {
-            validateBullets(customPoints, 10, 150);
+            validateBullets(customPoints, 10, 300);
         });
     }
 });
@@ -410,9 +410,9 @@ window.addEventListener('DOMContentLoaded', function() {
             // Validate all bullet textareas before submit
             document.querySelectorAll('textarea[name^="experience_bullets_"], textarea[name^="project_bullets_"], textarea[name^="co_bullets_"], textarea[name^="extra_bullets_"], textarea[name="custom_points"]').forEach(function(textarea) {
                 if (textarea.name === 'custom_points') {
-                    validateBullets(textarea, 10, 150);
+                    validateBullets(textarea, 10, 300);
                 } else {
-                    validateBullets(textarea, 4, 150);
+                    validateBullets(textarea, 5, 250);
                 }
             });
         });
